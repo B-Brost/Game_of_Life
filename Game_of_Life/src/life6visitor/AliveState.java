@@ -1,0 +1,38 @@
+package life6visitor;
+
+import java.util.ArrayList;
+
+public class AliveState implements CellState{
+
+	private static AliveState instance;
+	private AliveState() {}
+	public static AliveState create()
+	{
+		
+		if (instance== null)
+		{
+			instance = new AliveState();
+		}
+		return instance;
+	}
+
+	public boolean isAlive()
+	{
+		return true;
+	}
+
+	@Override
+	public CellState dead() {
+		return this;
+	}
+
+	@Override
+	public CellState alive() {
+		return this;
+	}
+	@Override
+	public void accept(LifeVisitor visitor,ArrayList<LifeCommand> commandList, Cell cell) {
+		visitor.visitLiveCell(cell,commandList);
+	}
+
+}
